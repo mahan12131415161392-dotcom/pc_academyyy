@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC ACADEMY | آموزش کامپیوتر</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Tahoma,sans-serif;
+ background:#080f1d;
+ color:#eaf2ff;
+ line-height:2;
+}
+header{
+ background:#101b2d;
+ border-bottom:1px solid #263a56;
+ padding:16px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:10px;
+}
+.logo{font-size:21px;font-weight:bold;color:#59d6ff}
+button{
+ border:0;
+ border-radius:12px;
+ padding:12px 18px;
+ font-family:inherit;
+ font-size:15px;
+ cursor:pointer;
+}
+.homeBtn{background:#1e334e;color:white}
+.container{max-width:1000px;margin:auto;padding:20px}
+.hero{
+ background:linear-gradient(135deg,#142c49,#0b1728);
+ border:1px solid #294768;
+ border-radius:20px;
+ padding:28px 20px;
+ margin:20px 0;
+}
+.hero h1{color:#59d6ff;font-size:26px}
+.hero p{color:#c5d4e7}
+.progressBox{
+ background:#15243a;
+ border-radius:14px;
+ padding:15px;
+ margin:18px 0;
+}
+.progressBar{
+ height:12px;
+ background:#263950;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:10px;
+}
+.progressFill{
+ height:100%;
+ width:0%;
+ background:#36c6f3;
+ transition:.3s;
+}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+ gap:15px;
+}
+.card{
+ background:#111d30;
+ border:1px solid #263c59;
+ border-radius:16px;
+ padding:18px;
+}
+.card h3{color:#5ed7ff}
+.card p{color:#b7c8dc}
+.card button{
+ width:100%;
+ background:#1765a5;
+ color:white;
+ margin-top:10px;
+}
+.lesson{
+ background:#101c2e;
+ border:1px solid #29415f;
+ border-radius:18px;
+ padding:20px;
+ margin-top:20px;
+}
+.lesson h2{color:#5ed7ff}
+.lesson h3{color:#9de5ff;margin-top:25px}
+.lesson p{color:#d4deec}
+.lesson ul{padding-right:22px}
+.lesson li{margin:8px 0}
+.tip{
+ background:#142b42;
+ border-right:4px solid #41c7f5;
+ padding:12px;
+ border-radius:10px;
+ margin:15px 0;
+}
+.code{
+ direction:ltr;
+ text-align:left;
+ background:#070d17;
+ color:#8be2ff;
+ padding:15px;
+ border-radius:12px;
+ overflow:auto;
+ font-family:monospace;
+ line-height:1.7;
+}
+.quiz{
+ background:#0b1626;
+ border:1px solid #29415f;
+ border-radius:16px;
+ padding:18px;
+ margin-top:22px;
+}
+.question{
+ border-bottom:1px solid #26384e;
+ padding:15px 0;
+}
+.option{
+ display:block;
+ width:100%;
+ text-align:right;
+ background:#17253a;
+ color:#eaf2ff;
+ margin:8px 0;
+ border:1px solid #304865;
+}
+.option.selected{background:#145c91;border-color:#56cfff}
+.option.correct{background:#17613e;border-color:#53d78b}
+.option.wrong{background:#712f3a;border-color:#ff7184}
+.result{font-weight:bold;margin-top:12px}
+.navButtons{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:20px;
+}
+.navButtons button{background:#1765a5;color:white}
+.navButtons button:disabled{opacity:.35}
+.hidden{display:none}
+footer{
+ text-align:center;
+ color:#8da4bd;
+ padding:30px 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">💻 PC ACADEMY</div>
+ <button class="homeBtn" onclick="showHome()">🏠 صفحه اصلی درس‌ها</button>
+</header>
+
+<div class="container">
+
+<section id="home">
+ <div class="hero">
+  <h1>آموزش مهارت‌های کامپیوتر</h1>
+  <p>از آشنایی با کامپیوتر تا ویندوز، اینترنت، امنیت، پایتون و هوش مصنوعی</p>
+  <p>یادگیری قدم‌به‌قدم، ساده و کاربردی</p>
+ </div>
+
+ <div class="progressBox">
+  <strong>پیشرفت دوره‌ها</strong>
+  <div id="progressText">۰ از ۷ درس تکمیل شده</div>
+  <div class="progressBar">
+   <div class="progressFill" id="progressFill"></div>
+  </div>
+ </div>
+
+ <div class="grid" id="courseGrid"></div>
+</section>
+
+<section id="lessonView" class="hidden">
+ <div class="lesson">
+  <h2 id="lessonTitle"></h2>
+  <div id="lessonContent"></div>
+
+  <div class="quiz" id="quizArea">
+   <h2>📝 آزمون این درس</h2>
+   <div id="quizQuestions"></div>
+   <button onclick="checkQuiz()" style="background:#16834c;color:white;margin-top:15px">بررسی جواب‌ها</button>
+   <div class="result" id="quizResult"></div>
+  </div>
+
+  <div class="navButtons">
+   <button id="prevBtn" onclick="previousCourse()">⬅️ درس قبلی</button>
+   <button onclick="showHome()">🏠 بازگشت به درس‌ها</button>
+   <button id="nextBtn" onclick="nextCourse()">درس بعدی ➡️</button>
+  </div>
+ </div>
+</section>
+
+</div>
+
+<footer>PC ACADEMY | یادگیری برای همه</footer>
+
+<script>
+const courses = [
+{
+title:"آشنایی با کامپیوتر",
+emoji:"🖥️",
+description:"شناخت کامپیوتر و قطعات اصلی آن",
+content:`
+<h3>کامپیوتر چیست؟</h3>
+<p>کامپیوتر دستگاهی الکترونیکی است که اطلاعات را دریافت می‌کند، آن‌ها را پردازش می‌کند و نتیجه را نمایش می‌دهد یا ذخیره می‌کند.</p>
+
+<h3>قطعات مهم کامپیوتر</h3>
+<ul>
+<li><b>CPU (پردازنده):</b> دستورها را پردازش می‌کند و یکی از بخش‌های اصلی کامپیوتر است.</li>
+<li><b>RAM (حافظه موقت):</b> اطلاعات مورد نیاز برنامه‌های در حال اجرا را موقتاً نگه می‌دارد.</li>
+<li><b>هارد یا SSD:</b> برای نگهداری فایل‌ها، برنامه‌ها و اطلاعات استفاده می‌شود.</li>
+<li><b>مادربرد:</b> قطعات مختلف کامپیوتر را به هم متصل می‌کند.</li>
+<li><b>مانیتور:</b> تصویر و اطلاعات را نمایش می‌دهد.</li>
+<li><b>کیبورد:</b> برای وارد کردن متن و دستورها استفاده می‌شود.</li>
+<li><b>ماوس:</b> برای حرکت نشانگر، انتخاب و کلیک کردن استفاده می‌شود.</li>
+</ul>
+
+<h3>سخت‌افزار و نرم‌افزار</h3>
+<p>سخت‌افزار به قطعات فیزیکی گفته می‌شود؛ مانند ماوس، مانیتور و پردازنده.</p>
+<p>نرم‌افزار برنامه‌هایی هستند که روی کامپیوتر اجرا می‌شوند؛ مانند ویندوز، مرورگر و برنامه‌های ویرایش متن.</p>
+
+<div class="tip">نکته: کامپیوتر برای انجام کارهای مختلف به همکاری سخت‌افزار و نرم‌افزار نیاز دارد.</div>
+
+<h3>کاربردهای کامپیوتر</h3>
+<ul>
+<li>تحقیق و یادگیری</li>
+<li>نوشتن و انجام کارهای اداری</li>
+<li>طراحی و برنامه‌نویسی</li>
+<li>ارتباط با دیگران</li>
+<li>ساخت و ویرایش تصاویر و ویدئو</li>
+</ul>
+`,
+quiz:[
+["CPU چه کاری انجام می‌دهد؟",["چاپ کاغذ","پردازش دستورها","پخش صدا"],1],
+["RAM چیست؟",["حافظه دائمی","نمایشگر","حافظه موقت"],2],
+["کدام مورد نرم‌افزار است؟",["ویندوز","ماوس","مانیتور"],0],
+["مانیتور چه کاری می‌کند؟",["ذخیره فایل","نمایش اطلاعات","پردازش دستور"],1],
+["مادربرد چه کاربردی دارد؟",["اتصال قطعات","چاپ عکس","پخش اینترنت"],0]
+]
+},
+{
+title:"آموزش ویندوز",
+emoji:"🪟",
+description:"کار با محیط ویندوز و مدیریت فایل‌ها",
+content:`
+<h3>ویندوز چیست؟</h3>
+<p>ویندوز یک سیستم‌عامل است. سیستم‌عامل برنامه اصلی کامپیوتر است که اجرای برنامه‌ها، مدیریت فایل‌ها و ارتباط با قطعات را انجام می‌دهد.</p>
+
+<h3>صفحه دسکتاپ</h3>
+<p>دسکتاپ محیط اصلی ویندوز است. در آن می‌توان آیکون برنامه‌ها، فایل‌ها و پوشه‌ها را مشاهده کرد.</p>
+
+<h3>منوی Start</h3>
+<p>منوی Start برای پیدا کردن برنامه‌ها، جستجو، تنظیمات و گزینه‌های خاموش کردن یا راه‌اندازی دوباره کامپیوتر استفاده می‌شود.</p>
+
+<h3>ساخت پوشه جدید</h3>
+<ol>
+<li>در محل مورد نظر کلیک راست کن.</li>
+<li>گزینه New را انتخاب کن.</li>
+<li>Folder را بزن.</li>
+<li>نام پوشه را وارد کن و Enter بزن.</li>
+</ol>
+
+<h3>میانبرهای مفید کیبورد</h3>
+<ul>
+<li><b>Ctrl + C:</b> کپی</li>
+<li><b>Ctrl + V:</b> چسباندن</li>
+<li><b>Ctrl + X:</b> بریدن</li>
+<li><b>Ctrl + Z:</b> برگشت آخرین کار</li>
+<li><b>Ctrl + A:</b> انتخاب همه</li>
+<li><b>Alt + Tab:</b> جابه‌جایی بین پنجره‌ها</li>
+</ul>
+
+<h3>تنظیمات ویندوز</h3>
+<p>در Settings می‌توان تنظیمات نمایشگر، صدا، اینترنت، بلوتوث، زبان و بسیاری از ویژگی‌های دیگر را تغییر داد.</p>
+<div class="tip">برای یادگیری بهتر، تغییرات را با دقت انجام بده و قبل از تغییر تنظیمات مهم، درباره آن‌ها اطلاعات کسب کن.</div>
+`,
+quiz:[
+["ویندوز چیست؟",["یک بازی","سیستم‌عامل","قطعه سخت‌افزاری"],1],
+["منوی Start برای چیست؟",["دسترسی به برنامه‌ها و تنظیمات","خاموش کردن مانیتور","ساخت قطعه کامپیوتر"],0],
+["Ctrl + C چه کاری انجام می‌دهد؟",["چسباندن","حذف","کپی"],2],
+["برای ساخت پوشه جدید کدام گزینه را انتخاب می‌کنیم؟",["New Folder","Rename","Refresh"],0],
+["تنظیم اینترنت در ویندوز معمولاً کجا قرار دارد؟",["Personalization","Apps","Network & Internet"],2]
+]
+},
+{
+title:"اینترنت و وب",
+emoji:"🌐",
+description:"آشنایی با مرورگر، جستجو، ایمیل و وب",
+content:`
+<h3>اینترنت چیست؟</h3>
+<p>اینترنت شبکه‌ای جهانی از دستگاه‌ها و شبکه‌های متصل به هم است که امکان تبادل اطلاعات و استفاده از خدمات مختلف را فراهم می‌کند.</p>
+
+<h3>وب چیست؟</h3>
+<p>وب یکی از خدماتی است که از طریق اینترنت استفاده می‌شود. وب‌سایت‌ها و صفحات اینترنتی با مرورگر باز می‌شوند.</p>
+
+<h3>مرورگر چیست؟</h3>
+<p>مرورگر برنامه‌ای برای باز کردن سایت‌هاست. مرورگرهای معروف شامل Chrome، Firefox، Edge و Safari هستند.</p>
+
+<h3>جستجوی بهتر در گوگل</h3>
+<ul>
+<li>عبارت واضح و دقیق بنویس.</li>
+<li>برای پیدا کردن آموزش، کلمه «آموزش» را اضافه کن.</li>
+<li>برای جستجوی اطلاعات تازه، تاریخ یا سال را مشخص کن.</li>
+<li>اطلاعات مهم را از چند منبع بررسی کن.</li>
+</ul>
+
+<h3>Bookmark (نشانک)</h3>
+<p>نشانک به تو کمک می‌کند یک سایت را ذخیره کنی تا بعداً سریع‌تر به آن دسترسی داشته باشی.</p>
+
+<h3>ایمیل</h3>
+<p>ایمیل برای ارسال و دریافت پیام استفاده می‌شود. در ایمیل معمولاً بخش‌های زیر را داریم:</p>
+<ul>
+<li><b>To:</b> گیرنده</li>
+<li><b>Subject:</b> موضوع پیام</li>
+<li><b>Body:</b> متن پیام</li>
+<li><b>Attachment:</b> فایل پیوست</li>
+</ul>
+
+<div class="tip">هنگام دریافت ایمیل ناشناس، فرستنده و فایل‌های پیوست را بررسی کن. روی لینک‌های مشکوک کلیک نکن.</div>
+`,
+quiz:[
+["وب چه ارتباطی با اینترنت دارد؟",["وب همان کامپیوتر است","وب یکی از خدمات اینترنت است","وب فقط بازی است"],1],
+["Bookmark چه کاربردی دارد؟",["ذخیره آدرس سایت برای دسترسی بعدی","حذف سایت","خاموش کردن مرورگر"],0],
+["برای پیدا کردن آموزش ساخت پوشه در ویندوز ۱۱ کدام جستجو بهتر است؟",["چیزها","ویندوز","آموزش ساخت پوشه در ویندوز ۱۱"],2],
+["Subject در ایمیل یعنی چه؟",["گیرنده","موضوع","پیوست"],1],
+["هنگام دریافت ایمیل ناشناس چه کار کنیم؟",["همه فایل‌ها را باز کنیم","اطلاعات شخصی بفرستیم","فرستنده و فایل را بررسی کنیم"],2]
+]
+},
+{
+title:"مهارت‌های کاربردی",
+emoji:"⌨️",
+description:"میانبرها، فایل‌ها، Word، Excel و PowerPoint",
+content:`
+<h3>ذخیره کردن فایل</h3>
+<p>برای ذخیره کردن فایل در بسیاری از برنامه‌ها از Ctrl + S استفاده می‌شود. بهتر است فایل را در پوشه‌ای مشخص و با نام مناسب ذخیره کنی.</p>
+
+<h3>کلید Space</h3>
+<p>کلید Space یا فاصله برای ایجاد فاصله بین کلمات هنگام تایپ استفاده می‌شود.</p>
+
+<h3>Microsoft Word</h3>
+<p>Word برنامه‌ای برای نوشتن و ویرایش متن است. با آن می‌توان نامه، گزارش، تحقیق و سندهای مختلف ساخت.</p>
+<ul>
+<li>تغییر اندازه و نوع نوشته</li>
+<li>تنظیم رنگ متن</li>
+<li>ساخت جدول</li>
+<li>تنظیم پاراگراف‌ها</li>
+<li>ذخیره و چاپ سند</li>
+</ul>
+
+<h3>Microsoft Excel</h3>
+<p>Excel برای ساخت جدول، محاسبات، مرتب‌سازی اطلاعات و نمودارها کاربرد دارد.</p>
+<p>فرمول‌ها در Excel معمولاً با علامت مساوی (=) شروع می‌شوند.</p>
+<div class="code">=SUM(A1:A5)</div>
+<p>این فرمول مجموع اعداد سلول‌های A1 تا A5 را محاسبه می‌کند.</p>
+
+<h3>Microsoft PowerPoint</h3>
+<p>PowerPoint برای ساخت ارائه‌های چنداسلایدی استفاده می‌شود. می‌توان متن، تصویر، نمودار و ویدئو را به اسلایدها اضافه کرد.</p>
+<div class="tip">تمرین: یک ارائه سه اسلایدی درباره یکی از موضوعات مورد علاقه خود بساز.</div>
+`,
+quiz:[
+["Ctrl + S چه کاری انجام می‌دهد؟",["بستن برنامه","ذخیره","چاپ"],1],
+["Space چه کاری انجام می‌دهد؟",["حذف فایل","باز کردن پنجره","ایجاد فاصله هنگام تایپ"],2],
+["Word برای چه کاری است؟",["ویرایش متن","محاسبه دما","مدیریت قطعات"],0],
+["فرمول در Excel معمولاً با چه علامتی شروع می‌شود؟",["#","=","@"],1],
+["PowerPoint برای چیست؟",["ساخت ارائه","ویرایش سیستم‌عامل","ساخت پوشه"],0]
+]
+},
+{
+title:"امنیت دیجیتال",
+emoji:"🔐",
+description:"محافظت از حساب‌ها، اطلاعات و دستگاه‌ها",
+content:`
+<h3>امنیت دیجیتال چیست؟</h3>
+<p>امنیت دیجیتال مجموعه‌ای از روش‌ها برای محافظت از دستگاه‌ها، حساب‌های کاربری، اطلاعات و حریم خصوصی در فضای دیجیتال است.</p>
+
+<h3>رمز عبور قوی</h3>
+<ul>
+<li>از رمزهای طولانی و غیرقابل حدس استفاده کن.</li>
+<li>برای حساب‌های مختلف، رمزهای متفاوت داشته باش.</li>
+<li>رمز خود را در اختیار دیگران قرار نده.</li>
+<li>از اطلاعات قابل حدس مثل تاریخ تولد به تنهایی استفاده نکن.</li>
+</ul>
+
+<h3>تأیید دو مرحله‌ای (2FA)</h3>
+<p>تأیید دو مرحله‌ای یک لایه امنیتی اضافی است. در کنار رمز عبور، روش دیگری برای تأیید هویت استفاده می‌شود.</p>
+
+<h3>فیشینگ چیست؟</h3>
+<p>فیشینگ نوعی فریب اینترنتی است که در آن فرد تلاش می‌کند اطلاعات حساس دیگران را با پیام یا صفحه جعلی به دست آورد.</p>
+<ul>
+<li>آدرس سایت را بررسی کن.</li>
+<li>به پیام‌هایی که عجله یا ترس ایجاد می‌کنند شک کن.</li>
+<li>رمز و کد تأیید را برای دیگران ارسال نکن.</li>
+<li>فایل‌های ناشناس را با احتیاط بررسی کن.</li>
+</ul>
+
+<h3>به‌روزرسانی</h3>
+<p>به‌روزرسانی سیستم‌عامل و برنامه‌ها می‌تواند مشکلات را برطرف کند و آسیب‌پذیری‌های امنیتی را کاهش دهد.</p>
+
+<h3>نسخه پشتیبان (Backup)</h3>
+<p>نسخه پشتیبان کپی جداگانه‌ای از فایل‌های مهم است که در صورت خرابی یا از دست رفتن اطلاعات می‌تواند به بازیابی آن‌ها کمک کند.</p>
+<div class="tip">اطلاعات مهم را در یک محل امن دیگر نیز نگهداری کن تا اگر دستگاه مشکل پیدا کرد، نسخه دیگری داشته باشی.</div>
+`,
+quiz:[
+["فیشینگ چیست؟",["نوعی قطعه کامپیوتر","فریب برای به‌دست آوردن اطلاعات","یک نرم‌افزار نقاشی"],1],
+["2FA چه فایده‌ای دارد؟",["افزایش امنیت حساب","افزایش صدای گوشی","تغییر رنگ صفحه"],0],
+["با پیام و لینک مشکوک چه کنیم؟",["سریع بازش کنیم","رمز را وارد کنیم","اعتبار پیام و لینک را بررسی کنیم"],2],
+["چرا برنامه‌ها را به‌روز می‌کنیم؟",["فقط برای تغییر ظاهر","رفع مشکلات و آسیب‌پذیری‌ها","حذف همه فایل‌ها"],1],
+["Backup چیست؟",["نسخه پشتیبان اطلاعات","خاموش کردن دستگاه","تغییر رمز"],1]
+]
+},
+{
+title:"آموزش پایتون",
+emoji:"🐍",
+description:"شروع برنامه‌نویسی با زبان Python",
+content:`
+<h3>پایتون چیست؟</h3>
+<p>Python یک زبان برنامه‌نویسی است که برای ساخت برنامه‌ها، ابزارها، تحلیل داده، وب و پروژه‌های هوش مصنوعی استفاده می‌شود.</p>
+
+<h3>اولین دستور: print</h3>
+<p>برای نمایش متن یا مقدار در خروجی از print استفاده می‌کنیم.</p>
+<div class="code">print("سلام دنیا")</div>
+<p>متن داخل علامت‌های نقل‌قول نمایش داده می‌شود.</p>
+
+<h3>متغیر چیست؟</h3>
+<p>متغیر نامی است که برای نگهداری یک مقدار استفاده می‌کنیم.</p>
+<div class="code">name = "Mahan"
+score = 10
+print(name)
+print(score)</div>
+<p>در این مثال، name یک متن و score یک عدد را نگهداری می‌کند.</p>
+
+<h3>دریافت ورودی با input</h3>
+<div class="code">name = input("نامت چیست؟ ")
+print("سلام", name)</div>
+<p>input از کاربر ورودی دریافت می‌کند.</p>
+
+<h3>شرط if</h3>
+<p>با if می‌توانیم بر اساس یک شرط، تصمیم بگیریم که چه دستوری اجرا شود.</p>
+<div class="code">age = 15
+
+if age >= 10:
+    print("شرط برقرار است")</div>
+<p>دقت کن دستورات داخل if باید با فاصله (Indentation) نوشته شوند.</p>
+
+<h3>حلقه for و range</h3>
+<div class="code">for i in range(5):
+    print(i)</div>
+<p>این کد اعداد ۰ تا ۴ را نمایش می‌دهد؛ یعنی پنج بار اجرا می‌شود.</p>
+
+<div class="tip">تمرین: برنامه‌ای بنویس که نام کاربر را دریافت کند و سپس به او سلام کند.</div>
+`,
+quiz:[
+["برای نمایش متن در پایتون از چه دستوری استفاده می‌کنیم؟",["input","print","range"],1],
+["score = 10 یعنی چه؟",["ذخیره عدد ۱۰ در متغیر score","پاک کردن score","نمایش عدد"],0],
+["input چه کاربردی دارد؟",["حذف ورودی","دریافت ورودی از کاربر","تکرار دستور"],1],
+["if برای چیست؟",["ساخت پوشه","چاپ تصویر","بررسی شرط"],2],
+["range(5) در حلقه معمولی چه اعدادی تولید می‌کند؟",["۱ تا ۵","۰ تا ۵","۰ تا ۴"],2]
+]
+},
+{
+title:"هوش مصنوعی",
+emoji:"🤖",
+description:"آشنایی با AI، کاربردها و نوشتن درخواست خوب",
+content:`
+<h3>هوش مصنوعی چیست؟</h3>
+<p>هوش مصنوعی یا AI شاخه‌ای از علوم رایانه است که سیستم‌هایی می‌سازد تا بعضی کارها مانند تحلیل اطلاعات، تشخیص الگو، تولید محتوا یا پاسخ به سؤال را انجام دهند.</p>
+
+<h3>یادگیری ماشین</h3>
+<p>در یادگیری ماشین، سیستم با استفاده از داده‌ها و نمونه‌ها الگوهایی را یاد می‌گیرد و از آن‌ها برای انجام وظایف یا پیش‌بینی استفاده می‌کند.</p>
+
+<h3>کاربردهای هوش مصنوعی</h3>
+<ul>
+<li>کمک در یادگیری و آموزش</li>
+<li>ترجمه زبان‌ها</li>
+<li>تشخیص تصویر و صدا</li>
+<li>کمک در نوشتن و ایده‌پردازی</li>
+<li>تحلیل داده‌ها</li>
+<li>تولید تصویر و متن</li>
+</ul>
+
+<h3>Prompt چیست؟</h3>
+<p>Prompt درخواست، پرسش یا دستور متنی‌ای است که به هوش مصنوعی می‌دهیم تا پاسخ یا نتیجه‌ای تولید کند.</p>
+
+<h3>چطور درخواست بهتری بنویسیم؟</h3>
+<ul>
+<li>موضوع را دقیق مشخص کن.</li>
+<li>بگو چه نوع پاسخی می‌خواهی.</li>
+<li>سطح توضیح را مشخص کن؛ مثلاً مبتدی.</li>
+<li>اگر لازم است مثال بخواه.</li>
+</ul>
+
+<div class="code">یک موضوع نمونه:
+«کار با پوشه‌ها در ویندوز را
+برای یک مبتدی توضیح بده.
+مرحله‌به‌مرحله و با مثال.»</div>
+
+<h3>محدودیت‌های هوش مصنوعی</h3>
+<p>هوش مصنوعی ممکن است اشتباه کند، اطلاعات قدیمی یا نادرست ارائه دهد، یا منظور سؤال را درست متوجه نشود. اطلاعات مهم را از منابع معتبر بررسی کن.</p>
+<div class="tip">هوش مصنوعی یک ابزار کمکی است؛ فکر کردن، بررسی کردن و تصمیم گرفتن همچنان اهمیت دارد.</div>
+`,
+quiz:[
+["هوش مصنوعی بیشتر در کدام حوزه قرار دارد؟",["علوم رایانه","آشپزی سنتی","ورزش"],0],
+["یادگیری ماشین از چه چیزی برای یادگیری الگو استفاده می‌کند؟",["فقط رنگ","داده و نمونه","خاموش کردن دستگاه"],1],
+["هوش مصنوعی می‌تواند چه کاری انجام دهد؟",["تولید متن و تصویر","فقط تایپ دستی","فقط خاموش کردن کامپیوتر"],0],
+["Prompt چیست؟",["قطعه کامپیوتر","نام مرورگر","درخواست یا دستور متنی"],2],
+["آیا هوش مصنوعی همیشه درست جواب می‌دهد؟",["بله، همیشه","ممکن است اشتباه کند","هرگز پاسخ نمی‌دهد"],1]
+]
+}
+];
+
+let currentCourse = 0;
+let completed = [];
+
+try {
+ completed = JSON.parse(localStorage.getItem("pcAcademyCompleted") || "[]");
+ if(!Array.isArray(completed)) completed=[];
+} catch(e) {
+ completed=[];
+}
+
+function faNumber(number){
+ return String(number).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+}
+
+function renderHome(){
+ const grid=document.getElementById("courseGrid");
+ grid.innerHTML="";
+
+ courses.forEach((course,index)=>{
+  const card=document.createElement("div");
+  card.className="card";
+  card.innerHTML=`
+   <h3>${course.emoji} ${course.title}</h3>
+   <p>${course.description}</p>
+   <p>${completed.includes(index)?"✅ تکمیل شده":"📘 شروع یادگیری"}</p>
+   <button onclick="openCourse(${index})">باز کردن درس</button>
+  `;
+  grid.appendChild(card);
+ });
+ updateProgress();
+}
+
+function updateProgress(){
+ const count=completed.length;
+ document.getElementById("progressText").textContent=
+ faNumber(count)+" از ۷ درس تکمیل شده";
+ document.getElementById("progressFill").style.width=
+ (count/7*100)+"%";
+}
+
+function showHome(){
+ document.getElementById("home").classList.remove("hidden");
+ document.getElementById("lessonView").classList.add("hidden");
+ history.replaceState(null,"",location.pathname+location.search);
+ renderHome();
+ window.scrollTo(0,0);
+}
+
+function openCourse(index){
+ if(index<0 || index>=courses.length) return;
+ currentCourse=index;
+
+ history.replaceState(null,"","#lesson"+(index+1));
+
+ const course=courses[index];
+ document.getElementById("home").classList.add("hidden");
+ document.getElementById("lessonView").classList.remove("hidden");
+ document.getElementById("lessonTitle").textContent=
+ course.emoji+" "+course.title;
+ document.getElementById("lessonContent").innerHTML=course.content;
+
+ document.getElementById("quizResult").textContent="";
+ renderQuiz();
+
+ document.getElementById("prevBtn").disabled=index===0;
+ document.getElementById("nextBtn").disabled=index===courses.length-1;
+
+ window.scrollTo(0,0);
+}
+
+function renderQuiz(){
+ const course=courses[currentCourse];
+ const area=document.getElementById("quizQuestions");
+ area.innerHTML="";
+
+ course.quiz.forEach((q,qi)=>{
+  const div=document.createElement("div");
+  div.className="question";
+  div.innerHTML=`<strong>${faNumber(qi+1)}. ${q[0]}</strong>`;
+
+  q[1].forEach((option,oi)=>{
+   const btn=document.createElement("button");
+   btn.className="option";
+   btn.textContent=option;
+   btn.dataset.question=qi;
+   btn.dataset.option=oi;
+   btn.onclick=()=>{
+    div.querySelectorAll(".option").forEach(b=>b.classList.remove("selected"));
+    btn.classList.add("selected");
+    btn.dataset.selected="true";
+   };
+   div.appendChild(btn);
+  });
+  area.appendChild(div);
+ });
+}
+
+function checkQuiz(){
+ const course=courses[currentCourse];
+ const questions=document.querySelectorAll(".question");
+ let correct=0;
+ let answered=0;
+
+ questions.forEach((div,qi)=>{
+  const selected=div.querySelector('[data-selected="true"]');
+  const buttons=div.querySelectorAll(".option");
+
+  buttons.forEach(btn=>{
+   btn.classList.remove("correct","wrong");
+   btn.disabled=true;
+  });
+
+  if(selected){
+   answered++;
+   const chosen=Number(selected.dataset.option);
+   const right=course.quiz[qi][2];
+
+   if(chosen===right){
+    correct++;
+    selected.classList.add("correct");
+   }else{
+    selected.classList.add("wrong");
+    buttons[right].classList.add("correct");
+   }
+  }else{
+   buttons[course.quiz[qi][2]].classList.add("correct");
+  }
+ });
+
+ const result=document.getElementById("quizResult");
+
+ if(answered<course.quiz.length){
+  result.textContent="به "+faNumber(correct)+" سؤال از "+faNumber(course.quiz.length)+" سؤال پاسخ درست دادی. پاسخ‌های درست با رنگ سبز مشخص شده‌اند.";
+ }else{
+  result.textContent="نتیجه: "+faNumber(correct)+" از "+faNumber(course.quiz.length)+" پاسخ درست";
+
+  if(correct===course.quiz.length){
+   if(!completed.includes(currentCourse)){
+    completed.push(currentCourse);
+    try{
+     localStorage.setItem("pcAcademyCompleted",JSON.stringify(completed));
+    }catch(e){}
+   }
+   result.textContent+=" 🎉 درس با موفقیت تکمیل شد!";
+  }else{
+   result.textContent+=" برای تکمیل درس، دوباره آموزش را مرور کن.";
+  }
+ }
+ updateProgress();
+}
+
+function nextCourse(){
+ if(currentCourse<courses.length-1){
+  openCourse(currentCourse+1);
+ }
+}
+
+function previousCourse(){
+ if(currentCourse>0){
+  openCourse(currentCourse-1);
+ }
+}
+
+renderHome();
+
+const match=location.hash.match(/^#lesson([1-7])$/);
+if(match){
+ openCourse(Number(match[1])-1);
+}else{
+ showHome();
+}
+</script>
+
+</body>
+</html>
