@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC ACADEMY | آموزش مهارت‌های کامپیوتر</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Tahoma,Arial,sans-serif;
+ background:#071326;
+ color:#eef7ff;
+ line-height:1.9
+}
+header{
+ background:#0c1d35;
+ padding:20px;
+ border-bottom:1px solid #183d5c;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:12px
+}
+.logo{font-size:24px;font-weight:bold;color:#38d9ff}
+nav a{color:#d8eaff;text-decoration:none;margin:8px}
+.hero{
+ text-align:center;
+ padding:65px 20px;
+ background:linear-gradient(135deg,#102c50,#071326)
+}
+.hero h1{font-size:34px;color:#42dcff}
+.hero p{color:#c5d8ed;max-width:650px;margin:15px auto}
+.main-btn{
+ display:inline-block;
+ background:#16bde9;
+ color:#061323;
+ padding:12px 25px;
+ border-radius:10px;
+ text-decoration:none;
+ font-weight:bold;
+ margin-top:15px
+}
+section{padding:35px 18px;max-width:1100px;margin:auto}
+h2{color:#42dcff;text-align:center;margin-bottom:25px}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px
+}
+.card{
+ background:#102440;
+ border:1px solid #214568;
+ border-radius:14px;
+ padding:20px;
+ color:#fff;
+ text-decoration:none;
+ display:block;
+ transition:.2s
+}
+.card:hover{
+ transform:translateY(-4px);
+ border-color:#42dcff;
+ background:#153253
+}
+.card h3{color:#42dcff;margin-top:0}
+.card p{color:#c7d8e9;font-size:14px}
+.tag{color:#8eeaff;font-size:13px}
+.about{
+ background:#0d2039;
+ border-radius:14px;
+ padding:25px;
+ text-align:center
+}
+footer{
+ text-align:center;
+ padding:25px;
+ background:#0c1d35;
+ color:#9fb5ca;
+ margin-top:35px
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">PC ACADEMY</div>
+ <nav>
+  <a href="#home">خانه</a>
+  <a href="#courses">آموزش‌ها</a>
+  <a href="#about">درباره ما</a>
+ </nav>
+</header>
+
+<div class="hero" id="home">
+ <h1>به دنیای PC ACADEMY خوش آمدید</h1>
+ <p>
+  از آشنایی با کامپیوتر تا ویندوز، اینترنت، امنیت،
+  برنامه‌نویسی و هوش مصنوعی را قدم‌به‌قدم یاد بگیرید.
+ </p>
+ <a class="main-btn" href="#courses">مشاهده آموزش‌ها</a>
+</div>
+
+<section id="courses">
+ <h2>دوره‌های آموزشی</h2>
+
+ <div class="grid">
+
+  <a class="card" href="lesson.html#lesson1">
+   <span class="tag">آموزش ۱</span>
+   <h3>آشنایی با کامپیوتر</h3>
+   <p>شناخت قطعات، سخت‌افزار، نرم‌افزار و نحوه کار کامپیوتر.</p>
+   <strong>ورود به آموزش ←</strong>
+  </a>
+
+  <a class="card" href="lesson.html#lesson2">
+   <span class="tag">آموزش ۲</span>
+   <h3>آموزش ویندوز</h3>
+   <p>یادگیری محیط ویندوز، تنظیمات، پوشه‌ها و فایل‌ها.</p>
+   <strong>ورود به آموزش ←</strong>
+  </a>
+
+  <a class="card" href="lesson.html#lesson3">
+   <span class="tag">آموزش ۳</span>
+   <h3>اینترنت و وب</h3>
+   <p>کار با مرورگر، جست‌وجو، سایت‌ها و ایمیل.</p>
+   <strong>ورود به آموزش ←</strong>
+  </a>
+
+  <a class="card" href="lesson.html#lesson4">
+   <span class="tag">آموزش ۴</span>
+   <h3>مهارت‌های کاربردی</h3>
+   <p>تایپ، میانبرها و آشنایی با Word و Excel و PowerPoint.</p>
+   <strong>ورود به آموزش ←</strong>
+  </a>
+
+  <a class="card" href="lesson.html#lesson5">
+   <span class="tag">آموزش ۵</span>
+   <h3>امنیت دیجیتال</h3>
+   <p>شناخت رمز عبور، امنیت حساب‌ها و روش‌های محافظت.</p>
+   <strong>ورود به آموزش ←</strong>
+  </a>
+
+  <a class="card" href="lesson.html#lesson6">
+   <span class="tag">آموزش ۶</span>
+   <h3>شروع برنامه‌نویسی</h3>
+   <p>آشنایی با پایتون و مفاهیم اولیه برنامه‌نویسی.</p>
+   <strong>ورود به آموزش ←</strong>
+  </a>
+
+  <a class="card" href="lesson.html#lesson7">
+   <span class="tag">آموزش ۷</span>
+   <h3>هوش مصنوعی</h3>
+   <p>آشنایی با هوش مصنوعی و روش استفاده درست از آن.</p>
+   <strong>ورود به آموزش ←</strong>
+  </a>
+
+ </div>
+</section>
+
+<section id="about">
+ <h2>درباره PC ACADEMY</h2>
+ <div class="about">
+  <p>
+   هدف ما فراهم کردن آموزش‌های ساده، کاربردی و قابل فهم
+   برای یادگیری مهارت‌های کامپیوتر است.
+  </p>
+  <p>یادگیری را از پایه شروع کنید و قدم‌به‌قدم پیش بروید.</p>
+ </div>
+</section>
+
+<footer>
+ PC ACADEMY | مسیر یادگیری مهارت‌های دیجیتال
+</footer>
+
+</body>
+</html>
