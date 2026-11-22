@@ -1,0 +1,310 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: sans-serif;
+    background: #080e1b;
+    color: #f1f5f9;
+    line-height: 1.9;
+}
+
+/* سربرگ */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 22px 7%;
+    background: #0e1728;
+    border-bottom: 1px solid #1e2d45;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    direction: ltr;
+    color: white;
+}
+
+.logo span {
+    color: #38bdf8;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* صفحه اصلی */
+.hero {
+    text-align: center;
+    padding: 85px 20px 100px;
+    background: radial-gradient(circle at top, #162b49, #080e1b 70%);
+}
+
+.tag {
+    display: inline-block;
+    padding: 9px 17px;
+    border: 1px solid #244c70;
+    border-radius: 30px;
+    color: #7dd3fc;
+    background: #10243a;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    line-height: 1.8;
+    margin-top: 25px;
+}
+
+.hero h1 span {
+    color: #38bdf8;
+}
+
+.hero p {
+    max-width: 500px;
+    margin: 15px auto 28px;
+    line-height: 2.2;
+    color: #aab8cc;
+}
+
+.start-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #06111f;
+    background: #38bdf8;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.start-btn:hover {
+    background: #7dd3fc;
+    transform: translateY(-2px);
+}
+
+/* کارت‌های آموزشی */
+.courses {
+    padding: 65px 7%;
+    text-align: center;
+}
+
+.courses h2,
+.about h2 {
+    font-size: 25px;
+}
+
+.section-text {
+    color: #94a3b8;
+    margin-top: 12px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px;
+    margin-top: 35px;
+}
+
+.card {
+    text-align: right;
+    background: #111c2e;
+    border: 1px solid #223149;
+    border-radius: 16px;
+    padding: 22px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    border-color: #38bdf8;
+    transform: translateY(-3px);
+}
+
+.card-icon {
+    font-size: 30px;
+    margin-bottom: 14px;
+}
+
+.card h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+    color: #e2e8f0;
+}
+
+.card p {
+    font-size: 13px;
+    color: #9eacc0;
+}
+
+/* درباره سایت */
+.about {
+    text-align: center;
+    padding: 55px 20px;
+    background: #101a2b;
+}
+
+.about p {
+    max-width: 500px;
+    margin: 18px auto 0;
+    color: #aab8cc;
+}
+
+/* صفحه درس */
+.lesson-page {
+    max-width: 950px;
+    margin: 35px auto;
+    padding: 0 18px 50px;
+}
+
+.lesson-box {
+    background: #111c2e;
+    border: 1px solid #263b57;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px #00000025;
+}
+
+.lesson-box h1 {
+    color: #38bdf8;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.lesson-box h2 {
+    color: #7dd3fc;
+    font-size: 21px;
+    margin: 24px 0 12px;
+}
+
+.lesson-box h3 {
+    color: #bae6fd;
+    margin: 18px 0 8px;
+}
+
+.lesson-box p {
+    color: #cbd5e1;
+    margin-bottom: 13px;
+    line-height: 2.2;
+}
+
+.lesson-box ul,
+.lesson-box ol {
+    padding-right: 25px;
+    color: #cbd5e1;
+    margin: 12px 0;
+}
+
+.lesson-box li {
+    margin-bottom: 9px;
+}
+
+.lesson-box strong {
+    color: #7dd3fc;
+}
+
+.lesson-box code {
+    direction: ltr;
+    display: inline-block;
+    background: #071321;
+    color: #7dd3fc;
+    padding: 3px 9px;
+    border-radius: 6px;
+}
+
+/* تمرین */
+.practice {
+    background: #10243a;
+    border: 1px solid #28618a;
+    border-radius: 16px;
+    padding: 23px;
+    margin: 25px 0;
+}
+
+.practice h2 {
+    color: #38bdf8;
+    margin-bottom: 12px;
+}
+
+.practice p {
+    color: #dbeafe;
+    line-height: 2.2;
+}
+
+/* دکمه بازگشت */
+.back-link {
+    display: inline-block;
+    color: #7dd3fc;
+    text-decoration: none;
+    border: 1px solid #28618a;
+    padding: 11px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.back-link:hover {
+    background: #10243a;
+}
+
+/* پایین سایت */
+footer {
+    text-align: center;
+    padding: 28px;
+    color: #7f91a9;
+    background: #080e1b;
+    font-size: 13px;
+}
+
+/* نمایش در موبایل */
+@media (max-width: 600px) {
+    .header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson-box {
+        padding: 19px;
+    }
+
+    .lesson-box h1 {
+        font-size: 23px;
+    }
+
+    .lesson-box h2 {
+        font-size: 19px;
+    }
+}
